@@ -12,12 +12,15 @@ import edu.m0r.rpg.sheet.stats.Stat;
  *
  * @author m0r
  */
-public class StatDiceResult extends DiceResult {
+public class StatDiceResult extends AbstractDiceResult {
     private Stat _rolledStat;
     
-    public StatDiceResult(Integer value, Stat rolledStat) {
+    public StatDiceResult(AbstractDiceResult result) {
+        super(result.getValue());
+    }
+    
+    public StatDiceResult(int value) {
         super(value);
-        _rolledStat = rolledStat;
     }
     
     public Stat getRolledStat() {
@@ -25,6 +28,10 @@ public class StatDiceResult extends DiceResult {
     }
     public void setRolledStat(Stat rolledStat) {
         _rolledStat = rolledStat;
+    }
+    @Override
+    public boolean isResolved() {
+        return _rolledStat != null && super.isResolved();
     }
     public boolean isWin() {
         if(!isResolved()) return false;

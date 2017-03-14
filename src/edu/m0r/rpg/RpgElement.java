@@ -13,6 +13,12 @@ package edu.m0r.rpg;
 public class RpgElement {
     private String _name;
     
+    protected RpgElement() { }
+    
+    protected final void init(String name) {
+        setName(name);
+    }
+    
     public String getName() {
         return _name;
     }

@@ -16,6 +16,11 @@ import java.util.List;
 public class MasterStat extends Stat {
     
     private List<SlaveStat> _slaves = new ArrayList<>();
+
+    protected MasterStat(Stat stat) {
+        super(stat);
+        init(stat.getValue(), stat.getModificator());
+    }
     
     public boolean addSlave(SlaveStat slave) {
         return !isSlave(slave) && _slaves.add(slave);

@@ -11,7 +11,7 @@ package edu.m0r.rpg.util;
  * @author m0r
  */
 public class Constants {
-    public static final int INT_DEFAULT_DICE_SIDES = 6;
+    public static final int INT_DEFAULT_DICE_MAX = 6;
     public static final int INT_DEFAULT_DICE_MIN = 1;
     
     public static final String STR_ERROR_NULL_INSTANCE_NAME = "Instance name is null";

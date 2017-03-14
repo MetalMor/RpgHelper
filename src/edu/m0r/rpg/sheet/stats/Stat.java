@@ -16,6 +16,15 @@ public class Stat extends RpgElement {
 
     private Integer _value;
     private Integer _modificator;
+
+    protected Stat(RpgElement element) {
+        init(element.getName());
+    }
+    
+    protected void init(Integer value, Integer modificator) {
+        setValue(value);
+        setModificator(modificator);
+    }
     
     public Integer getValue() {
         return _value;

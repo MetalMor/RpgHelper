@@ -6,7 +6,6 @@
 
 package edu.m0r.rpg.roll.dice;
 
-import edu.m0r.rpg.roll.result.DiceResult;
 import edu.m0r.rpg.roll.result.StatDiceResult;
 import edu.m0r.rpg.sheet.stats.Stat;
 
@@ -14,22 +13,24 @@ import edu.m0r.rpg.sheet.stats.Stat;
  *
  * @author m0r
  */
-public class StatDice extends Dice {
+public class StatDice extends AbstractDice<StatDiceResult> {
     private Stat _rolledStat;
     
-    public StatDice(int max) {
-        super(max);
+    public StatDice() {
+        super(StatDiceResult.class);
     }
-    public StatDice(int min, int max) {
-        super(min, max);
+    protected StatDice(AbstractDice dice) {
+        this();
+        setMin(dice.getMin());
+        setMax(dice.getMax());
     }
     
     @Override
-    public DiceResult roll() {
+    public StatDiceResult roll() {
         if(getRolledStat() == null) return null;
-        StatDiceResult result = (StatDiceResult) getResult();
-        result.setRolledStat(getRolledStat());
-        return result;
+        setResult(new StatDiceResult(randomValue()));
+        getResult().setRolledStat(getRolledStat());
+        return getResult();
     }
     
     public Stat getRolledStat() {

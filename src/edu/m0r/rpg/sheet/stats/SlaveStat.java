@@ -13,6 +13,11 @@ package edu.m0r.rpg.sheet.stats;
 public class SlaveStat extends Stat {
     
     private MasterStat _master;
+
+    protected SlaveStat(Stat stat) {
+        super(stat);
+        init(stat.getValue(), stat.getModificator());
+    }
     
     public MasterStat getMaster() {
         return _master;

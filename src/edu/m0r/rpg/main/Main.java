@@ -1,11 +1,9 @@
 package edu.m0r.rpg.main;
 
-import edu.m0r.rpg.builder.RpgFactory;
-import edu.m0r.rpg.builder.StatBuilder;
-import edu.m0r.rpg.roll.Roll;
-import edu.m0r.rpg.roll.dice.Dice;
-import edu.m0r.rpg.roll.dice.StatDice;
-import edu.m0r.rpg.sheet.stats.Stat;
+import edu.m0r.rpg.roll.StatRollBuilder;
+import edu.m0r.rpg.roll.result.StatDiceResult;
+import edu.m0r.rpg.sheet.stats.StatBuilder;
+import java.util.List;
 
 
 /**
@@ -32,30 +30,12 @@ public class Main {
         for(DiceResult result : results) 
             System.out.println("Result #" + results.indexOf(result) + ": " + result.getValue());
         */
-        RpgFactory factory = RpgFactory.getInstance("factory");
+        // Stat stat = new StatBuilder<>().setName("StatTest").setValue(12).build();
+        StatBuilder sb = new StatBuilder().setName("StatTest").setValue(10).setModificator(-3);
+        StatRollBuilder rb = new StatRollBuilder(sb.build()).setName("RollTest").setDices(10).setSides(100);
+        List<StatDiceResult> results = rb.build().doThrow();
+        for(StatDiceResult result : results)
+            System.out.println("Result #" + results.indexOf(result) + ": " + result.getValue() + " + " + result.getRolledStat().getTotalValue());
         
-        Roll<StatDice> roll = new Roll(10, 100);
-        
-    }
-    
-    private static void commandLine(String[] args) {
-        Dice dice = makeDice(args);
-        int rollNumber = args.length > 0 ? Integer.parseInt(args[0]) : 1;
-        int index = 0;
-        while(index++ < rollNumber)
-            System.out.println("Result #" + index + ": " + dice.roll());
-    }
-    
-    /**
-     * En funcion del array de parametros de entrada, instancia un objeto de la
-     * clase <code>Dice</code> para ejecutar las tiradas.
-     * @param args Argumentos entrados por linea de comandos.
-     * @return Objeto <code>Dice</code> correspondiente a los argumentos.
-     */
-    private static Dice makeDice(String[] args) {
-        if(args == null) return new Dice();
-        if(args.length == 2) return new Dice(Integer.parseInt(args[1]));
-        if(args.length > 2) return new Dice(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
-        return new Dice();
     }
 }

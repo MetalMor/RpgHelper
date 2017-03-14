@@ -4,31 +4,34 @@
  * and open the template in the editor.
  */
 
-package edu.m0r.rpg.builder;
-import edu.m0r.rpg.sheet.stats.MasterStat;
-import edu.m0r.rpg.sheet.stats.SlaveStat;
-import edu.m0r.rpg.sheet.stats.Stat;
+package edu.m0r.rpg.sheet.stats;
+import edu.m0r.rpg.RpgElementBuilder;
 import java.util.List;
 
 /**
  *
  * @author m0r
+ * @param <S>
  */
-public class StatBuilder extends RpgElementBuilder {
-    private Integer _value;
-    private Integer _modificator;
-    private MasterStat _master;
-    private List<SlaveStat> _slaves;
+public class StatBuilder<S extends Stat> extends RpgElementBuilder {
+    protected Integer _value;
+    protected Integer _modificator;
+    protected MasterStat _master;
+    protected List<SlaveStat> _slaves;
 
-    public StatBuilder(AbstractFactory creator) {
-        super(creator);
-    }
+    public StatBuilder() { }
     
     @Override
-    public Stat build() {
-        Stat stat = (Stat) super.build();
+    public S build() {
+        S stat = (S) new Stat(super.build());
+        stat.setName(_name);
         stat.setValue(_value);
         stat.setModificator(_modificator);
+        if(_master != null) {
+            
+        } else if(_slaves != null) {
+            
+        }
         return stat;
     }
     
@@ -49,26 +52,26 @@ public class StatBuilder extends RpgElementBuilder {
     }
     
     @Override
-    public StatBuilder setName(String name) {
+    public StatBuilder<S> setName(String name) {
         return (StatBuilder) super.setName(name);
     }
-    public StatBuilder setValue(Integer value) {
+    public StatBuilder<S> setValue(Integer value) {
         if(_value == null) _modificator = null;
         else if(_modificator == null) _modificator = 0;
         _value = value;
         return this;
     }
-    public StatBuilder setModificator(Integer modificator) {
+    public StatBuilder<S> setModificator(Integer modificator) {
         if(_value == null) return this;
         else if(modificator == null) modificator = 0;
         _modificator = modificator;
         return this;
     }
-    public StatBuilder setMaster(MasterStat master) {
+    public StatBuilder<S> setMaster(MasterStat master) {
         _master = master;
         return this;
     }
-    public StatBuilder setSlaves(List<SlaveStat> slaves) {
+    public StatBuilder<S> setSlaves(List<SlaveStat> slaves) {
         _slaves = slaves;
         return this;
     }
