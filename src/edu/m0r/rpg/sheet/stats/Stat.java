@@ -7,6 +7,10 @@
 package edu.m0r.rpg.sheet.stats;
 
 import edu.m0r.rpg.RpgElement;
+import edu.m0r.rpg.roll.StatRollBuilder;
+import edu.m0r.rpg.roll.dice.DiceBuilder;
+import edu.m0r.rpg.roll.dice.StatDice;
+import edu.m0r.rpg.roll.result.StatDiceResult;
 
 /**
  *
@@ -24,6 +28,11 @@ public class Stat extends RpgElement {
     protected void init(Integer value, Integer modificator) {
         setValue(value);
         setModificator(modificator);
+    }
+    
+    public StatDiceResult roll() {
+        return new StatRollBuilder(this).setName("Roll{" + toString() + "}").
+                setSides(100).setDices(1).build().doThrow().get(0);
     }
     
     public Integer getValue() {
@@ -44,5 +53,10 @@ public class Stat extends RpgElement {
     }
     public void setModificator(Integer modificator) {
         _modificator = modificator;
+    }
+    
+    @Override
+    public String toString() {
+        return super.toString() + "[" + getValue() + "]";
     }
 }

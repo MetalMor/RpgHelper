@@ -10,7 +10,7 @@ package edu.m0r.rpg;
  *
  * @author m0r
  */
-public class RpgElement {
+public class RpgElement implements IRpgElement {
     private String _name;
     
     protected RpgElement() { }
@@ -32,5 +32,10 @@ public class RpgElement {
         if(!(obj instanceof RpgElement)) return false;
         RpgElement other = (RpgElement) obj;
         return other.getName().equals(getName());
+    }
+    
+    @Override
+    public String toString() {
+        return getName();
     }
 }

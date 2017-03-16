@@ -40,7 +40,10 @@ public class DiceBuilder<D extends AbstractDice> implements IBuilder<D> {
     
     @Override
     public D build() {
-        return (D) Reflection.getInstance(_diceType.getConstructors()[0]);
+        D dice = (D) Reflection.getInstance(_diceType.getConstructors()[0]);
+        dice.setMin(_min);
+        dice.setMax(_max);
+        return dice;
     }
     
     public Class<D> getDiceType() {

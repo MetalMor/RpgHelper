@@ -37,4 +37,9 @@ public class SlaveStat extends Stat {
     public boolean equals(Object obj) {
         return super.equals(obj) && ((SlaveStat) obj).getMaster().equals(getMaster());
     }
+    
+    @Override
+    public String toString() {
+        return getName() + "(" + getMaster().getName() + ")" + "[" + getValue() + "]";
+    }
 }
