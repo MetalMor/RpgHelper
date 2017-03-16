@@ -1,6 +1,10 @@
 package edu.m0r.rpg.main;
 
+import edu.m0r.rpg.roll.Roll;
+import edu.m0r.rpg.roll.RollBuilder;
 import edu.m0r.rpg.roll.StatRollBuilder;
+import edu.m0r.rpg.roll.dice.Dice;
+import edu.m0r.rpg.roll.result.DiceResult;
 import edu.m0r.rpg.roll.result.StatDiceResult;
 import edu.m0r.rpg.sheet.stats.StatBuilder;
 import java.util.List;
@@ -21,21 +25,19 @@ public class Main {
      * @param args Argumentos de entrada por terminal.
      */
     public static void main(String[] args) {
-        // Descomentar siguiente linea para juego de dados por consola
-        // commandLine(args);
-        
-        /* Prueba de la clase Roll
-        Roll roll = new Roll(10, 100);
+        commandLine(args);
+    }
+    
+    private static void commandLine(String[] args) {
+        RollBuilder rb = new RollBuilder().setName("RollTest");
+        Roll roll;
+        if(args == null) roll = rb.build();
+        else if(args.length == 1) roll = rb.setSides(Integer.parseInt(args[0])).build();
+        else if(args.length == 2) roll = rb.setDices(Integer.parseInt(args[0]))
+                .setSides(Integer.parseInt(args[1])).build();
+        else roll = rb.build();
         List<DiceResult> results = roll.doThrow();
-        for(DiceResult result : results) 
-            System.out.println("Result #" + results.indexOf(result) + ": " + result.getValue());
-        */
-        // Stat stat = new StatBuilder<>().setName("StatTest").setValue(12).build();
-        StatBuilder sb = new StatBuilder().setName("StatTest").setValue(10).setModificator(-3);
-        StatRollBuilder rb = new StatRollBuilder(sb.build()).setName("RollTest").setDices(10).setSides(100);
-        List<StatDiceResult> results = rb.build().doThrow();
-        for(StatDiceResult result : results)
-            System.out.println("Result #" + results.indexOf(result) + ": " + result.getValue() + " + " + result.getRolledStat().getTotalValue());
-        
+        for(DiceResult result : results)
+            System.out.println("Result #" + (results.indexOf(result) + 1) + ": " + result.getValue());
     }
 }
