@@ -31,8 +31,4 @@ public class RollBuilder extends AbstractRollBuilder<Dice, DiceResult> {
     public RollBuilder setSides(int nSides) {
         return (RollBuilder) super.setSides(nSides);
     }
-    @Override
-    public RollBuilder setRolledStat(Stat rolledStat) {
-        return (RollBuilder) super.setRolledStat(rolledStat);
-    }
 }

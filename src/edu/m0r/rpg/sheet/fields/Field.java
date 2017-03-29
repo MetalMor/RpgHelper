@@ -11,20 +11,27 @@ import edu.m0r.rpg.RpgElement;
 /**
  *
  * @author m0r
+ * @param <C>
  */
-public class Field extends RpgElement {
+public class Field<C> extends RpgElement {
     
-    private String _value;
+    private final Class<C> _contentType;
     
-    protected Field(RpgElement element) {
-        super();
-        init(element.getName());
+    private C _content;
+    
+    protected Field(Class<C> contetType) {
+        _contentType = contetType;
     }
     
-    public String getValue() {
-        return _value;
+    public Class<C> getValueType() {
+        return _contentType;
     }
-    public void setValue(String value) {
-        _value = value;
+    
+    public C getContent() {
+        return _content;
+    }
+    
+    public void setContent(C value) {
+        _content = value;
     }
 }

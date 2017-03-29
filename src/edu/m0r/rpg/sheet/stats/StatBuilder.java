@@ -19,7 +19,9 @@ public class StatBuilder<S extends Stat> extends RpgElementBuilder {
     protected MasterStat _master;
     protected List<SlaveStat> _slaves;
 
-    public StatBuilder() { }
+    public StatBuilder() {
+        super();
+    }
     
     @Override
     public S build() {

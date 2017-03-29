@@ -30,7 +30,7 @@ public abstract class AbstractDice<R extends AbstractDiceResult> {
     /**
      * Objeto de aleatoriedad.
      */
-    private Random _random;
+    private final Random _random;
     /**
      * Resultado de la tirada.
      */

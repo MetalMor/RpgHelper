@@ -12,21 +12,33 @@ import edu.m0r.rpg.RpgElementBuilder;
  *
  * @author m0r
  */
-public class FieldBuilder extends RpgElementBuilder {
+public class FieldBuilder<C> extends RpgElementBuilder {
     
-    private String _value;
+    private C _content;
     
-    public FieldBuilder() {}
+    private final Class<C> _contentType;
+    
+    public FieldBuilder(Class<C> contentType) {
+        super();
+        _contentType = contentType;
+    }
     
     @Override
     public Field build() {
-        Field field = new Field(super.build());
-        field.setValue(_value);
+        Field field = new Field(_contentType);
+        field.setName(_name);
+        field.setContent(_content);
         return field;
     }
     
-    public FieldBuilder setValue(String value) {
-        _value = value;
+    @Override
+    public FieldBuilder setName(String name) {
+        super.setName(name);
+        return this;
+    }
+    
+    public FieldBuilder setContent(C content) {
+        _content = content;
         return this;
     }
 }
