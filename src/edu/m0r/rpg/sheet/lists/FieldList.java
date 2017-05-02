@@ -6,17 +6,16 @@
 
 package edu.m0r.rpg.sheet.lists;
 
-import edu.m0r.rpg.RpgElement;
 import edu.m0r.rpg.sheet.fields.Field;
 
 /**
  *
  * @author m0r
- * @param <F>
+ * @param <C>
  */
-public class FieldList extends RpgList<Field<?>> {
+public class FieldList<C> extends RpgList<Field<C>> {
 
-    public FieldList(RpgList<Field<?>> rpgList) {
+    public FieldList(RpgList<Field<C>> rpgList) {
         super(rpgList);
     }
 

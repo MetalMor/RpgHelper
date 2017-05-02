@@ -11,11 +11,13 @@ import edu.m0r.rpg.sheet.fields.Field;
 /**
  *
  * @author m0r
+ * @param <F>
+ * @param <C>
  */
-public class FieldListBuilder extends AbstractListBuilder<FieldList, Field<?>> {
+public class FieldListBuilder<F extends Field<C>, C> extends AbstractListBuilder<FieldList<C>, Field<C>> {
 
-    public FieldListBuilder(Class<Field<?>> fieldType) {
-        super(FieldList.class, fieldType);
+    public FieldListBuilder(Class<FieldList<C>> fieldListType) {
+        super(fieldListType);
     }
 
 }

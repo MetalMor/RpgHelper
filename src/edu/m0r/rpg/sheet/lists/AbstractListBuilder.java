@@ -8,6 +8,7 @@ package edu.m0r.rpg.sheet.lists;
 
 import edu.m0r.rpg.RpgElement;
 import edu.m0r.rpg.RpgElementBuilder;
+import edu.m0r.rpg.util.Reflection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,21 +21,17 @@ import java.util.List;
 public abstract class AbstractListBuilder<L extends RpgList<E>, E extends RpgElement> extends RpgElementBuilder {
     
     private final Class<L> _listType;
-    private final Class<E> _elementType;
-    
-    private RpgList<E> _rpgList;
     
     private List<E> _list = new ArrayList<>();
     
-    protected AbstractListBuilder(Class<L> listType, Class<E> elementType) {
+    protected AbstractListBuilder(Class<L> listType) {
         super();
         _listType = listType;
-        _elementType = elementType;
     }
     
     @Override
-    public RpgList<E> build() {
-        RpgList<E> rpgList = new RpgList<>(super.build());
+    public L build() {
+        L rpgList = (L) Reflection.getInstance(_listType.getConstructors()[0], super.build());
         rpgList.addAll(_list);
         return rpgList;
     }

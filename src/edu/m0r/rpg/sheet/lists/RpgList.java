@@ -21,12 +21,16 @@ public class RpgList<E extends RpgElement> extends RpgElement implements List<E>
     
     private final ArrayList<E> _list = new ArrayList<>();
     
-    protected RpgList(RpgElement element) {
+    private final Class<E> _elementType;
+    
+    protected RpgList(RpgElement element, Class<E> elementType) {
         init(element.getName());
+        _elementType = elementType;
     }
     
     protected RpgList(RpgList<E> rpgList) {
         addAll(rpgList);
+        _elementType = rpgList._elementType;
     }
 
     @Override
